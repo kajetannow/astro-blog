@@ -24,4 +24,4 @@ pnpm-debug.log*
 .idea/
 
 # save space
-src/content/photojournal/*
+# src/content/photojournal/*
