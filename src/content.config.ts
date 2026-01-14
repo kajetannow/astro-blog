@@ -15,4 +15,22 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const photojournal = defineCollection({
+	loader: glob({ base: './src/content/photojournal', pattern: '**/*.{md,mdx}' }),
+// loader: glob({ base: './src/content/photojournal', pattern: '**/*.{yaml,yml}' }),
+  	schema: ({ image }) =>
+		z.object({
+		title: z.string(),
+		description: z.string(),
+		cover: image(),
+		date: z.coerce.date(),
+		location: z.string().optional(),
+		camera: z.string().optional(),
+		lens: z.string().optional(),
+		}),
+});
+
+export const collections = {
+	blog,
+	photojournal,
+};

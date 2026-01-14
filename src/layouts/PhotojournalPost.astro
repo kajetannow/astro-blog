@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+type Props = CollectionEntry<'photojournal'>['data'];
+
+const { title, description, date, cover, location, camera, lens } = Astro.props;
+
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.prose {
+				width: 80vw;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: left;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.10em 0;
+			}
+			.title h2 {
+				font-weight: 300;
+			}
+			.date {
+				font-weight: 400;
+				margin-bottom: 0.5em;
+				/*color: rgb(var(--gray));*/
+			}
+			hr{
+				border-bottom: 3px black solid;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="prose">
+					<div class="title">
+						<h1>{title}</h1>
+						<h2>{location}</h2>
+						<div class="date">
+							<FormattedDate date={date} />
+						</div>
+						<p>
+							{camera ? <span><b>Aparat:</b> {camera}</span> : ""}
+							{lens ? <span><b> Obiektyw:</b> {lens}</span> : ""}
+						</p>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,126 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = (await getCollection('photojournal')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 70vw;
+			}
+			ul {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 2rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			.post-photojournal{
+				width: 100%;
+				border-bottom: 3px black solid;
+				/*border-left: 3px black transparent;*/
+			}
+
+			ul li * {
+				text-decoration: none;
+				transition: 0.2s ease;
+			}
+			ul li img {
+				opacity: 0;
+				transition: 0.2s ease;
+				display: block;
+				position: fixed;
+				top: 13vh;
+				right: 10vw;
+				z-index: 777;
+			}
+			/*ul li:hover img, ul li:first-child img {*/
+			ul li:hover img {
+				opacity: 1;
+				transition: 0.2s ease;
+			}
+			img{
+				width: 25vw;
+			}
+			.cover-photo{
+				box-shadow: 20px 20px 0px 0px var(--nav-color);
+			}
+			.post-date{
+				font-size: 0.8em;
+			}
+			ul li h4.description{
+				display: none;
+			}
+			@media (max-width: 720px) {
+			main{
+				width: auto;
+				font-size: 0.9em;
+			}
+			ul li a{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			ul li img {
+				width: 75%;
+				opacity: 1;
+				transition: 0.2s ease;
+				position: relative;
+				top: 0;
+				right: 0;
+				z-index: 777;
+				padding-bottom: 1em;
+			}
+			ul li h4 {
+				width: 85%;
+			}
+			.cover-photo{
+				box-shadow: none;
+			}
+			ul li h4.description{
+				display: inline;
+				font-weight: 400;
+				font-size: 0.9em;
+			}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<ul>
+					{
+						posts.map((post) => (
+							<li class="post-photojournal">
+								<a href={`/photojournal/${post.id}/`}>
+									<h4 class="title">
+										<span class="w-300 post-date"><FormattedDate date={post.data.date} /></span> <br />
+										{post.data.title}
+										<span class="w-300">{post.data.location ? `| ${post.data.location}` : ""}</span>
+									</h4>
+									<Image width={720} height={360} src={post.data.cover} alt="" class="cover-photo"/>
+									{/* <h4 class="description">{post.data.description}</h4>*/}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

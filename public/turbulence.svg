@@ -1,0 +1,17 @@
+<svg
+  width="600"
+  height="600"
+  viewBox="0 0 600 600"
+  xmlns="http://www.w3.org/2000/svg">		
+        <filter id="noise">
+			<feTurbulence
+				type="fractalNoise"
+				baseFrequency="109.5"
+				numOctaves="3"
+				result="turbulence"
+                stitchTiles='stitch'
+			/>
+            <feColorMatrix type="saturate" values="0.10"/>
+		</filter>
+<rect width="1600" height="1600" filter="url(#noise)" opacity="0.6" />
+</svg>

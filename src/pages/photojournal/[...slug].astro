@@ -1,0 +1,44 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import PhotojournalPost from '../../layouts/PhotojournalPost.astro';
+import { getAlbumImages } from "../../utils/getAllPhotos";
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('photojournal');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'photojournal'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+
+function getFolder(slug: String){
+    let arr = slug.split("/")
+    arr.pop()
+    return arr.join("/")
+}
+
+const images = await getAlbumImages(getFolder(post.id));
+---
+
+<PhotojournalPost {...post.data}>
+  <Content />
+	    { 
+		images.map((image) => (
+        <Image
+          src={image}
+          alt={`Image from ${post.data.title} album`}
+          //format="avif"
+		      height={1440}
+          quality={70}
+          loading="lazy"
+          class="photo-in-gallery"
+        />
+      ))
+    }
+</PhotojournalPost>
