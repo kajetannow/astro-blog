@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'http:/kajetannowak.pl',
+	site: 'https://kajetannowak.pl',
 	integrations: [mdx(), sitemap()],
 	redirects: {
 		"/": "/photojournal"
