@@ -29,9 +29,7 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href="/fonts/FunnelDisplay-VariableFont_wght.ttf" as="font" type="font/tff" crossorigin />
-<link rel="preload" href="/fonts/HostGrotesk-Italic-VariableFont_wght.ttf" as="font" type="font/tff" crossorigin />
-<link rel="preload" href="/fonts/HostGrotesk-VariableFont_wght.ttf" as="font" type="font/tff" crossorigin />
+<link rel="prefetch" href="/fonts/FunnelDisplay-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
