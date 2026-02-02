@@ -35,6 +35,7 @@
 }
 body {
 	font-family: "Funnel Display", "Host Grotesk", 'Atkinson', sans-serif;
+	font-optical-sizing: auto;
 	margin: 0;
 	padding: 0;
 	text-align: left;
