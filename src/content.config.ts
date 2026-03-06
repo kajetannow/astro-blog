@@ -22,7 +22,7 @@ const photojournal = defineCollection({
 		z.object({
 		title: z.string(),
 		description: z.string(),
-		cover: image(),
+		cover: z.string(),
 		date: z.coerce.date(),
 		date_end: z.coerce.date().optional(),
 		location: z.string().optional(),
@@ -30,6 +30,13 @@ const photojournal = defineCollection({
 		lens: z.string().optional(),
 		}),
 });
+
+/*
+bug in GH Action - cover images
+https://github.com/withastro/astro/issues/12673
+https://docs.astro.build/en/reference/errors/local-image-used-wrongly/
+https://docs.astro.build/en/guides/images/#images-in-content-collections
+*/
 
 export const collections = {
 	blog,

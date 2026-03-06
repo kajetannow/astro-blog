@@ -112,7 +112,7 @@ const posts = (await getCollection('photojournal')).sort(
 										{post.data.title}
 										<span class="w-300">{post.data.location ? `| ${post.data.location}` : ""}</span>
 									</h4>
-									<Image width={720} height={360} src={post.data.cover} alt="" class="cover-photo"/>
+									<img width={720} height={360} src={post.data.cover} alt="" class="cover-photo"/>
 									{/* <h4 class="description">{post.data.description}</h4>*/}
 								</a>
 							</li>
