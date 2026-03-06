@@ -29,12 +29,9 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<!-- 
-<link rel="prefetch" href="/fonts/FunnelDisplay-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
--->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="/fonts/FunnelDisplay-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
