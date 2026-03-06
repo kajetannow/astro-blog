@@ -8,7 +8,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'photojournal'>['data'];
 
-const { title, description, date, cover, location, camera, lens } = Astro.props;
+const { title, description, date, date_end, cover, location, camera, lens } = Astro.props;
 
 ---
 
@@ -60,7 +60,7 @@ const { title, description, date, cover, location, camera, lens } = Astro.props;
 						<h1>{title}</h1>
 						<h2>{location}</h2>
 						<div class="date">
-							<FormattedDate date={date} />
+							<FormattedDate date={date} /> {date_end ? <>&ndash; <FormattedDate date={date_end} /></> : ""}
 						</div>
 						<p>
 							{camera ? <span><b>Aparat:</b> {camera}</span> : ""}

@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 export async function getStaticPaths() {
 	const posts = await getCollection('photojournal');
 	return posts.map((post) => ({
-		params: { slug: post.id },
+		params: { slug: post.id.slice(0, -2) }, // remove language code
 		props: post,
 	}));
 }
@@ -23,7 +23,7 @@ function getFolder(slug: String){
     return arr.join("/")
 }
 
-const images = await getAlbumImages(getFolder(post.id));
+const images = await getAlbumImages(getFolder(post.id.slice(0, -2)));
 ---
 
 <PhotojournalPost {...post.data}>

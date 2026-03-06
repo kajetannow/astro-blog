@@ -106,7 +106,7 @@ const posts = (await getCollection('photojournal')).sort(
 					{
 						posts.map((post) => (
 							<li class="post-photojournal">
-								<a href={`/photojournal/${post.id}/`}>
+								<a href={`/photojournal/${post.id.slice(0, -2)}/`}>
 									<h4 class="title">
 										<span class="w-300 post-date"><FormattedDate date={post.data.date} /></span> <br />
 										{post.data.title}

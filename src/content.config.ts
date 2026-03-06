@@ -16,7 +16,7 @@ const blog = defineCollection({
 });
 
 const photojournal = defineCollection({
-	loader: glob({ base: './src/content/photojournal', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/photojournal', pattern: '**/*.pl.{md,mdx}' }),
 // loader: glob({ base: './src/content/photojournal', pattern: '**/*.{yaml,yml}' }),
   	schema: ({ image }) =>
 		z.object({
@@ -24,6 +24,7 @@ const photojournal = defineCollection({
 		description: z.string(),
 		cover: image(),
 		date: z.coerce.date(),
+		date_end: z.coerce.date().optional(),
 		location: z.string().optional(),
 		camera: z.string().optional(),
 		lens: z.string().optional(),
